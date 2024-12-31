@@ -1,0 +1,6 @@
+@JamesThewBackend_HostAddress = http://localhost:5159
+
+GET {{JamesThewBackend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

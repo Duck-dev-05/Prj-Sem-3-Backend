@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "GSJkB7bgCPQa//OwCtDVhxz8WkG6DQH23FtKg31DVOw=",
+  "Source": "JamesThewBackend",
+  "BasePath": "_content/JamesThewBackend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "JamesThewBackend\\wwwroot",
+      "Source": "JamesThewBackend",
+      "ContentRoot": "D:\\Code\\project-sem-3\\JamesThewBackend\\wwwroot\\",
+      "BasePath": "_content/JamesThewBackend",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
