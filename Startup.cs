@@ -1,45 +1,36 @@
-using Microsoft.EntityFrameworkCore;
-using JamesThew.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
-public class Startup 
+public class Startup
 {
-    public IConfiguration Configuration {get;set;}
-    public Startup(IConfiguration configuration)
+    public void ConfigureServices(IServiceCollection services)
     {
-        Configuration = configuration;
-    }
+        // JWT Bearer Authentication Setup
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(static options =>
+            {
+                // Set the Authority URL (the URL that issues the JWT tokens)
+                options.Authority = "https://your-identity-server-url.com"; // Use HTTPS for production
+                options.Audience = "your-api-audience";  // Your API's audience value
 
-    public void ConfigureServices (IServiceCollection services)
-    {
-        services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                // Allow HTTP for development environments (disable RequireHttpsMetadata)
+                options.RequireHttpsMetadata = !Environment.IsDevelopment();
+            });
 
-        services.AddControllersWithViews();
+        // Add MVC or controllers, etc.
+        services.AddControllers();
+        services.AddAuthorization();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        if(env.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-        }
-        else
-        {
-            app.UseExceptionHandler("/Home/Error");
-            app.UseHsts();
-        }
-
-        app.UseHttpsRedirection();
-        app.UseStaticFiles();
-
-        app.UseRouting();
-
+        // Use Authentication and Authorization middleware
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseEndpoints(endpoints =>
+        // Map the controllers
+        app.UseEndpoints(static endpoints =>
         {
-            endpoints.MapDefaultControllerRoute();
+            endpoints.MapControllers();
         });
     }
 }

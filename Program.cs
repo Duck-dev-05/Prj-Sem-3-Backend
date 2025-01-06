@@ -1,41 +1,30 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-//Add services to the container 
-builder.Services.AddControllers();
-
-//Configure Auth
+// Configure services
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-       .AddJwtBearer(options =>
-       {
-        options.Authority = "#";
-        options.Audience = "#";
-       });
+    .AddJwtBearer(options =>
+    {
+        // Set the Authority URL (the URL that issues the JWT tokens)
+        options.Authority = "https://your-identity-server-url.com"; // Use HTTPS for production
+        options.Audience = "your-api-audience";  // Your API's audience value
 
-//Add Authorization
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("AdminOnly",policy =>
-    policy.RequireRole("Admin"));
-});
+        // Allow HTTP for development environments (disable RequireHttpsMetadata)
+        options.RequireHttpsMetadata = !builder.Environment.IsDevelopment();
+    });
+
+// Add other services such as controllers, authorization, etc.
+builder.Services.AddControllers();
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-//Configure the HTTP request 
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
+// Middleware configuration
+app.UseAuthentication();  // Use JWT Authentication
+app.UseAuthorization();   // Use Authorization
 
-app.UseRouting();
-
-//Middleware
-app.UseAuthentication();
-app.UseAuthorization();
-
+// Map endpoints for controllers
 app.MapControllers();
 
 app.Run();

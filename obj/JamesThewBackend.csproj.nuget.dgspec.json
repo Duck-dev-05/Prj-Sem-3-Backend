@@ -10,11 +10,11 @@
         "projectUniqueName": "D:\\Code\\project-sem-3\\JamesThewBackend\\JamesThewBackend.csproj",
         "projectName": "JamesThewBackend",
         "projectPath": "D:\\Code\\project-sem-3\\JamesThewBackend\\JamesThewBackend.csproj",
-        "packagesPath": "C:\\Users\\minec\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Duck\\.nuget\\packages\\",
         "outputPath": "D:\\Code\\project-sem-3\\JamesThewBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\minec\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Duck\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"

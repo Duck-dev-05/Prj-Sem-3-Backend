@@ -81,3 +81,6 @@ D:\Code\project-sem-3\JamesThewBackend\obj\Debug\net8.0\refint\JamesThewBackend.
 D:\Code\project-sem-3\JamesThewBackend\obj\Debug\net8.0\JamesThewBackend.pdb
 D:\Code\project-sem-3\JamesThewBackend\obj\Debug\net8.0\JamesThewBackend.genruntimeconfig.cache
 D:\Code\project-sem-3\JamesThewBackend\obj\Debug\net8.0\ref\JamesThewBackend.dll
+D:\Code\project-sem-3\JamesThewBackend\obj\Debug\net8.0\JamesThewBackend.sourcelink.json
+D:\Code\project-sem-3\JamesThewBackend\bin\Debug\net8.0\package-lock.json
+D:\Code\project-sem-3\JamesThewBackend\bin\Debug\net8.0\package.json

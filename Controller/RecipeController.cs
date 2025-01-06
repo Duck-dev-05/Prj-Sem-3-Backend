@@ -1,23 +1,48 @@
 using Microsoft.AspNetCore.Mvc;
-using JamesThew.Model;
 
 namespace JamesThew.Controller
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class RecipeController : ControllerBase
+    [ApiController]
+    public class RecipesController : ControllerBase
     {
-        [HttpPost("add")]
-        public IActionResult AddRecipe(Recipe recipe)
+        //In-Memory Data Store for Demo
+        private static List<string> Recipes = new List<string>
         {
-            return Ok("Recipe added");
+            "Spaghetti",
+            "Chicken",
+            "Vegetarian"
+        };
+
+        //Get: api/recipes
+        [HttpGet]
+        public IActionResult GetRecipe(int id)
+        {
+            if (id < 0 || id >= Recipes.Count)
+                return NotFound("Recipe not found");
+            return Ok(Recipes[id]);
         }
 
-        [HttpGet("list")]
-        public IActionResult ListRecipes()
+        //POST: api/recipes
+        [HttpPost]
+        public IActionResult AddRecipe([FromBody] string recipe)
         {
-            //Logic for listing recipes
-            return Ok("Listing recipes");
+            if (string.IsNullOrWhiteSpace(recipe))
+               return BadRequest("Recipe name cannot be empty");
+            
+            Recipes.Add(recipe);
+            return CreatedAtAction(nameof(GetRecipe), new {id = Recipes.Count - 1}, recipe);
+        }
+
+        //Delete
+        [HttpDelete("{id}")]
+        public IActionResult DeleteRecipe(int id)
+        {
+            if (id < 0 || id >= Recipes.Count)
+               return NotFound("Recipe not found");
+            
+            Recipes.RemoveAt(id);
+            return NoContent();
         }
     }
 }
